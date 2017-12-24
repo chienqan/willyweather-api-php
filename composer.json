@@ -1,0 +1,28 @@
+{
+    "name": "quangchien/willyweather-api",
+    "description": "A PHP package to interact with WillyWeather API V2",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "quangchien",
+            "email": "qchien2406@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WillyWeatherAPI\\":"src/"
+        }
+    },
+    "repositories": [
+        {
+            "type":"vcs",
+            "url":"https://github.com/quangchien/willyweather-php"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "require": {
+        "owenandrews/willyweather-php": "dev-master"
+    }
+}
