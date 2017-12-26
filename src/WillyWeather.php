@@ -31,7 +31,7 @@ abstract class WillyWeather
     public function __construct($apiKey)
     {
         $client = new Client($apiKey);
-        $this->willy = $client->location($this->locaiton);
+        $this->willy = $client->location($this->location);
     }
 
     /**
