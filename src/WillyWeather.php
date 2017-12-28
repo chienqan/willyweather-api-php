@@ -4,34 +4,54 @@ namespace WillyWeatherAPI;
 
 use WillyWeather\Client;
 
-abstract class WillyWeather
+class WillyWeather
 {
     /**
      * willyweather-php package
-     * 
+     *
+     * @access protected 
      */
-    protected $willy;
+    protected $willyWeatherPHP;
+
+    /**
+     * the api key of Willy Weather
+     * 
+     * @var string
+     */
+    protected $apiKey;
 
     /**
      * the location code
-     * 
+     *
+     * @var integer
      */
-    protected $location = 4955;
+    protected $location;
 
     /**
      * the number of days
      * 
+     * @var integer
      */
-    protected $days = 14;
+    protected $days;
+
+    /** @var Weather\Observations Collection of Observations related functions. */
+    public $forecasts;
+
+    /** @var Weather\Observations Collection of Observations related functions. */
+    public $observations;
 
     /**
      * Constructor
      * 
      */
-    public function __construct($apiKey)
+    public function __construct(array $config = [])
     {
-        $client = new Client($apiKey);
-        $this->willy = $client->location($this->location);
+        $this->location = isset($config['location']) ? $config['location'] : 4955;
+        $this->days = isset($config['days']) ? $config['days'] : 14;
+        $this->apiKey = isset($config['apiKey']) ? $config['apiKey'] : '';
+        $this->willyWeatherPHP = (new Client($this->apiKey))->location($this->location);
+        $this->forecasts = new Weather\Forecasts($this);
+        $this->observations = new Weather\Observations($this);
     }
 
     /**
@@ -41,7 +61,7 @@ abstract class WillyWeather
      */
     public function getForecasts(string $type)
     {
-        return $this->willy->getForecasts(["forecasts" => [$type], "days" => $this->days]);
+        return $this->willyWeatherPHP->getForecasts(["forecasts" => [$type], "days" => $this->days]);
     }
 
     /**
@@ -51,7 +71,7 @@ abstract class WillyWeather
      */
     public function getObservations(string $type)
     {
-        return $this->willy->getObservationalGraphs(["observationalGraphs" => [$type], "days" => $this->days]);
+        return $this->willyWeatherPHP->getObservationalGraphs(["observationalGraphs" => [$type], "days" => $this->days]);
     }
 
     /**
@@ -60,7 +80,7 @@ abstract class WillyWeather
      */
     public function getObservational()
     {
-        return $this->willy->getObservational();
+        return $this->willyWeatherPHP->getObservational();
     }
     
 }
