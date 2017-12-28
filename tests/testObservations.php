@@ -1,46 +1,38 @@
 <?php
 
-use WillyWeatherAPI\Observations;
-
-class testObservations extends PHPUnit_Framework_TestCase
+class TestObservations extends TestCore
 {
-    public function __construct()
-    {
-        $this->observations = new Observations();
-        parent::__construct();
-    }
-    
     public function testGetWeatherObs()
     {
-        $weather = $this->observations->getWeatherObs();
+        $weather = $this->willyAPI->observations->getWeatherObs();
         $this->assertNotEmpty($weather);
         $this->assertArrayHasKey('observations', $weather);
     }
 
     public function testGetDewPoint()
     {
-        $weather = $this->observations->getDewPoint();
+        $weather = $this->willyAPI->observations->getDewPoint();
         $this->assertNotEmpty($weather);
         $this->assertArrayHasKey('dew-point', $weather);
     }
 
     public function testGetRainfall()
     {
-        $weather = $this->observations->getRainfall();
+        $weather = $this->willyAPI->observations->getRainfall();
         $this->assertNotEmpty($weather);
         $this->assertArrayHasKey('rainfall', $weather);
     }
 
     public function testGetTemperature()
     {
-        $weather = $this->observations->getTemperature();
+        $weather = $this->willyAPI->observations->getTemperature();
         $this->assertNotEmpty($weather);
         $this->assertArrayHasKey('temperature', $weather);
     }
 
     public function testGetWind()
     {
-        $weather = $this->observations->getWind();
+        $weather = $this->willyAPI->observations->getWind();
         $this->assertNotEmpty($weather);
         $this->assertArrayHasKey('wind', $weather);
     }
