@@ -23,6 +23,6 @@
         "phpunit/phpunit": "4.0.*"
     },
     "require": {
-        "owenandrews/willyweather-php": "dev-master"
+        "quangchien/willyweather-v2": "0.1.*"
     }
 }
