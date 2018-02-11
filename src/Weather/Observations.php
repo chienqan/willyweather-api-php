@@ -6,6 +6,12 @@ use WillyWeatherAPI\WillyWeather;
 
 class Observations extends WeatherCollection
 {
+    public function reduceArray()
+    {
+        $listDay = array_values($listDay);
+        return $listDay[0]['dataConfig']['series']['groups'][0];
+    }
+    
     public function getWeatherObs()
     {
         return $this->willy->getObservational();
