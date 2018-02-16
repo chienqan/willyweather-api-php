@@ -11,6 +11,10 @@ class Forecasts extends WeatherCollection
         $days = $array[0]['days'];
         $entries = array();
         foreach ($days as $day) {
+            if (isset($day['dateTime'])) {
+                $entries[] = $day['dateTime'];
+            }
+            
             $entries[] = $day['entries'];
         }
     
