@@ -6,20 +6,24 @@ class Forecasts extends WeatherCollection
 {
     public function reduceArray($array)
     {
-        $array = array_values($array);
+        $array = array_values($response);
 
         $days = $array[0]['days'];
-        $entries = array();
+
+        $listData = array();
         foreach ($days as $day) {
+            $data = array();
+            
             if (isset($day['dateTime'])) {
-                $entries[] = $day['dateTime'];
+                $data['dateTime'] = $day['dateTime'];
             }
             
-            $entries[] = $day['entries'];
+            $data['entries'] = array_reduce($day['entries'], 'array_merge', array());;
+
+            $listData[] = $data;
         }
-    
-        $entries = array_reduce($entries, 'array_merge', array());
-        return $entries;
+        
+        return $listData;
     }
 
     public function getWind()
