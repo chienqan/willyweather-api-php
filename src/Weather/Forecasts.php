@@ -6,7 +6,7 @@ class Forecasts extends WeatherCollection
 {
     public function reduceArray($array)
     {
-        $array = array_values($response);
+        $array = array_values($array);
 
         $days = $array[0]['days'];
 
@@ -22,7 +22,7 @@ class Forecasts extends WeatherCollection
 
             $listData[] = $data;
         }
-        
+
         return $listData;
     }
 
