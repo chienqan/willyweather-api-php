@@ -55,15 +55,26 @@ class WillyWeather
     }
 
     /**
+     * refresh instance of willy weather php
+     *
+     * @return void
+     */
+    public function refreshInstance()
+    {
+        $this->willyWeatherPHP = (new Client($this->apiKey))->location($this->location);
+    }
+
+    /**
      * Get forecasts
      * @param type Type of the forecasts
      * 
      */
     public function getForecasts(string $type)
     {
+        $this->refreshInstance();
         return $this->willyWeatherPHP->getForecasts(["forecasts" => [$type], "days" => $this->days]);
     }
-
+    
     /**
      * Get observations
      * @param type Type of the observations
@@ -71,6 +82,7 @@ class WillyWeather
      */
     public function getObservations(string $type)
     {
+        $this->refreshInstance();
         return $this->willyWeatherPHP->getObservationalGraphs(["observationalGraphs" => [$type], "days" => $this->days]);
     }
 
@@ -80,6 +92,7 @@ class WillyWeather
      */
     public function getObservational()
     {
+        $this->refreshInstance();
         return $this->willyWeatherPHP->getObservational();
     }
     
